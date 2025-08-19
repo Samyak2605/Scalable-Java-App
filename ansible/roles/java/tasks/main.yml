@@ -1,0 +1,7 @@
+---
+# Main task file for Java application setup
+- include_tasks: java.yml
+- include_tasks: python.yml
+- include_tasks: app.yml
+- include_tasks: cloudwatch.yml
+- include_tasks: backends.yml

@@ -1,0 +1,23 @@
+---
+# Install Python and boto3 for AWS integration
+- name: Install Python3 and pip
+  apt:
+    name:
+      - python3
+      - python3-pip
+    state: present
+
+- name: Install boto3 for AWS SDK
+  pip:
+    name:
+      - boto3
+      - botocore
+    state: present
+
+- name: Verify Python installation
+  command: python3 --version
+  register: python_version
+
+- name: Display Python version
+  debug:
+    var: python_version.stdout

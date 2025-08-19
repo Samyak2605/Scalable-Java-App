@@ -1,0 +1,23 @@
+---
+# Update system and install additional dependencies
+- name: Update all packages
+  apt:
+    update_cache: yes
+    upgrade: dist
+    cache_valid_time: 3600
+
+- name: Install additional system packages
+  apt:
+    name:
+      - curl
+      - wget
+      - unzip
+      - htop
+      - net-tools
+      - awscli
+    state: present
+
+- name: Clean up package cache
+  apt:
+    autoclean: yes
+    autoremove: yes

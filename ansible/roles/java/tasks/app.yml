@@ -1,0 +1,34 @@
+---
+# Deploy Java application files
+- name: Copy application files to EC2 instance
+  copy:
+    src: "{{ item }}"
+    dest: "{{ dest_dir }}"
+    owner: ubuntu
+    group: ubuntu
+    mode: '0755'
+  loop: "{{ files }}"
+
+- name: Ensure /opt directory exists
+  file:
+    path: /opt
+    state: directory
+    mode: '0755'
+
+- name: Create application.properties template
+  template:
+    src: application.properties.j2
+    dest: /opt/application.properties
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Make start script executable
+  file:
+    path: "{{ dest_dir }}start.sh"
+    mode: '0755'
+
+- name: Make properties script executable
+  file:
+    path: "{{ dest_dir }}properties.py"
+    mode: '0755'
